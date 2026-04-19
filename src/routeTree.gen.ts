@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as ExploreRouteImport } from './routes/explore'
-import { Route as IndexRouteImport } from './routes/index'
 
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
@@ -29,41 +28,32 @@ const ExploreRoute = ExploreRouteImport.update({
   path: '/explore',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
   '/plan': typeof PlanRoute
   '/stories': typeof StoriesRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
   '/plan': typeof PlanRoute
   '/stories': typeof StoriesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
   '/plan': typeof PlanRoute
   '/stories': typeof StoriesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explore' | '/plan' | '/stories'
+  fullPaths: '/explore' | '/plan' | '/stories'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explore' | '/plan' | '/stories'
-  id: '__root__' | '/' | '/explore' | '/plan' | '/stories'
+  to: '/explore' | '/plan' | '/stories'
+  id: '__root__' | '/explore' | '/plan' | '/stories'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   ExploreRoute: typeof ExploreRoute
   PlanRoute: typeof PlanRoute
   StoriesRoute: typeof StoriesRoute
@@ -92,18 +82,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExploreRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   ExploreRoute: ExploreRoute,
   PlanRoute: PlanRoute,
   StoriesRoute: StoriesRoute,
