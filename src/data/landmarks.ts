@@ -1,260 +1,176 @@
-// Mock data — structured to mirror a future GeoJSON FeatureCollection from a backend.
-// Coordinates are [lng, lat].
-
-export type Category = "historical" | "museum" | "nature" | "religious" | "food";
-export type Interest = "history" | "culture" | "food" | "nature" | "spiritual";
-export type TravelStyle = "relaxed" | "explorer" | "academic";
+export type Category = "historical" | "museum" | "nature" | "culture";
 
 export interface Landmark {
   id: string;
   name: string;
-  city: string;
+  emoji: string;
+  lat: number;
+  lng: number;
   category: Category;
-  interests: Interest[];
-  coordinates: [number, number];
-  shortDescription: string;
-  description: string;
-  image: string;
   era: string;
+  duration: string;
+  color: string;
+  story: string;
+  rating: number;
+  teaser: string;
 }
-
-export interface Story {
-  id: string;
-  title: string;
-  subtitle: string;
-  cover: string;
-  steps: {
-    landmarkId: string;
-    chapter: string;
-    narration: string;
-  }[];
-}
-
-const img = (seed: string) =>
-  `https://images.unsplash.com/${seed}?auto=format&fit=crop&w=1200&q=80`;
 
 export const landmarks: Landmark[] = [
   {
     id: "giza",
     name: "Pyramids of Giza",
-    city: "Giza",
+    emoji: "🏔️",
+    lat: 29.9792,
+    lng: 31.1342,
     category: "historical",
-    interests: ["history", "culture"],
-    coordinates: [31.1342, 29.9792],
-    shortDescription: "The last surviving Wonder of the Ancient World.",
-    description:
-      "Built over 4,500 years ago for Pharaohs Khufu, Khafre, and Menkaure, the Giza necropolis remains an impossible feat of geometry, astronomy, and human will.",
-    image: img("photo-1503177119275-0aa32b3a9368"),
-    era: "Old Kingdom · c. 2580 BCE",
-  },
-  {
-    id: "sphinx",
-    name: "Great Sphinx",
-    city: "Giza",
-    category: "historical",
-    interests: ["history", "spiritual"],
-    coordinates: [31.1376, 29.9753],
-    shortDescription: "Guardian of the plateau, carved from a single ridge.",
-    description:
-      "The largest monolithic statue on Earth, the Sphinx faces the rising sun — a lion-bodied sentinel whose true age is still debated by Egyptologists.",
-    image: img("photo-1539768942893-daf53e448371"),
-    era: "Old Kingdom · c. 2500 BCE",
-  },
-  {
-    id: "egyptian-museum",
-    name: "Grand Egyptian Museum",
-    city: "Cairo",
-    category: "museum",
-    interests: ["history", "culture"],
-    coordinates: [31.1198, 29.9936],
-    shortDescription: "The largest archaeological museum in the world.",
-    description:
-      "Home to the complete Tutankhamun collection and over 100,000 artifacts spanning every dynasty of pharaonic civilization.",
-    image: img("photo-1568322445389-f64ac2515020"),
-    era: "Modern · 2024",
-  },
-  {
-    id: "khan-el-khalili",
-    name: "Khan el-Khalili",
-    city: "Cairo",
-    category: "food",
-    interests: ["culture", "food"],
-    coordinates: [31.2625, 30.0476],
-    shortDescription: "A 14th-century bazaar still trading in spice and gold.",
-    description:
-      "Wander labyrinthine alleys where copper smiths, perfume distillers, and tea houses preserve craft traditions unchanged since the Mamluk era.",
-    image: img("photo-1572252009286-268acec5ca0a"),
-    era: "Mamluk · 1382",
+    era: "2560 BCE",
+    duration: "3–5 hrs",
+    color: "#c8a96e",
+    rating: 5,
+    teaser: "The last surviving wonder of the ancient world.",
+    story:
+      "The last surviving wonder of the ancient world, the Great Pyramid of Giza was built as the eternal tomb of Pharaoh Khufu and stood as the tallest structure on Earth for 3,800 years. Alongside it stand the pyramids of Khafre and Menkaure, together forming one of the most recognizable skylines in human history. The nearby Great Sphinx, carved from a single limestone ridge, silently guards this sacred necropolis and continues to mystify historians and archaeologists alike.",
   },
   {
     id: "karnak",
-    name: "Karnak Temple Complex",
-    city: "Luxor",
-    category: "religious",
-    interests: ["history", "spiritual"],
-    coordinates: [32.6573, 25.7188],
-    shortDescription: "The largest religious building ever constructed.",
-    description:
-      "A vast open-air museum of pylons, obelisks, and the Hypostyle Hall's 134 colossal columns — built and rebuilt over 2,000 years.",
-    image: img("photo-1568322445583-d52e6b06e3b6"),
-    era: "New Kingdom · c. 2055 BCE",
-  },
-  {
-    id: "valley-of-kings",
-    name: "Valley of the Kings",
-    city: "Luxor",
+    name: "Karnak Temple",
+    emoji: "🏛️",
+    lat: 25.7189,
+    lng: 32.6573,
     category: "historical",
-    interests: ["history", "spiritual"],
-    coordinates: [32.6014, 25.7402],
-    shortDescription: "Royal necropolis hidden in the Theban hills.",
-    description:
-      "Sixty-three known tombs lie carved into the limestone, including those of Tutankhamun, Ramesses VI, and the exquisitely preserved Nefertari.",
-    image: img("photo-1601824850232-29b7b4f97cb1"),
-    era: "New Kingdom · 1550 BCE",
+    era: "2055 BCE",
+    duration: "2–4 hrs",
+    color: "#e06b6b",
+    rating: 5,
+    teaser: "The largest sacred complex ever built.",
+    story:
+      "Karnak is not a single temple but an enormous sacred city — the largest ancient religious complex ever constructed, covering over 200 acres of towering pylons, hypostyle halls, and obelisks. Built across 2,000 years by successive pharaohs, it was the beating heart of Amun worship in ancient Egypt. The Great Hypostyle Hall alone contains 134 colossal columns arranged in 16 rows, their surfaces still alive with painted hieroglyphs telling stories of gods and kings.",
   },
   {
     id: "abu-simbel",
     name: "Abu Simbel Temples",
-    city: "Aswan",
-    category: "religious",
-    interests: ["history", "spiritual"],
-    coordinates: [31.6258, 22.3372],
-    shortDescription: "Ramesses II's monument to himself — and to the sun.",
-    description:
-      "Twice a year, sunlight pierces the inner sanctuary to illuminate the seated gods. Relocated stone-by-stone in the 1960s to escape Lake Nasser.",
-    image: img("photo-1590114538379-6764538d6f01"),
-    era: "New Kingdom · 1264 BCE",
+    emoji: "🗿",
+    lat: 22.3372,
+    lng: 31.6256,
+    category: "historical",
+    era: "1264 BCE",
+    duration: "2–3 hrs",
+    color: "#c87ce0",
+    rating: 5,
+    teaser: "Four colossi guarding a solar miracle.",
+    story:
+      "Hewn directly into the sandstone cliffs of Nubia by Ramesses II, Abu Simbel is one of antiquity's most audacious architectural feats — four 20-meter colossi of the pharaoh guard the entrance like stone titans. Twice a year, on the 22nd of February and October, sunlight pierces 60 meters into the mountain to illuminate the inner sanctuary in a solar miracle engineered by ancient priests. In the 1960s, the entire temple was cut into 2,000 blocks and relocated 65 meters uphill to save it from the rising waters of Lake Nasser.",
+  },
+  {
+    id: "valley",
+    name: "Valley of the Kings",
+    emoji: "⚱️",
+    lat: 25.7397,
+    lng: 32.6011,
+    category: "historical",
+    era: "1550 BCE",
+    duration: "3–4 hrs",
+    color: "#c8a96e",
+    rating: 5,
+    teaser: "Tomb of Tutankhamun and 62 royal burials.",
+    story:
+      "Carved into the limestone cliffs of the western bank of the Nile, the Valley of the Kings served as the royal necropolis for Egypt's most powerful pharaohs for nearly 500 years. Sixty-three tombs have been discovered here, each descending through painted corridors bursting with spells, prayers, and vivid scenes from the Book of the Dead. The most celebrated discovery came in 1922 when Howard Carter unearthed Tutankhamun's virtually intact tomb — the golden treasures of the boy-king stunned the world and ignited a global obsession with ancient Egypt.",
+  },
+  {
+    id: "luxor",
+    name: "Luxor Temple",
+    emoji: "🕌",
+    lat: 25.6994,
+    lng: 32.6393,
+    category: "historical",
+    era: "1400 BCE",
+    duration: "1–2 hrs",
+    color: "#e8d5a3",
+    rating: 4,
+    teaser: "Stage of the great Opet Festival.",
+    story:
+      "Standing proudly on the eastern bank of the Nile in what was once the ancient city of Thebes, Luxor Temple was the stage for Egypt's greatest annual celebration — the Opet Festival, during which the gods journeyed from Karnak by river barge to reunite in sacred marriage. Originally connected to Karnak by an Avenue of Sphinxes stretching 3 kilometers, the temple is a layered monument built by Amenhotep III, Ramesses II, and even Alexander the Great. At night, the temple glows golden against the dark sky, its towering pylon still bearing the ghost of vivid ancient paint.",
   },
   {
     id: "philae",
-    name: "Philae Temple",
-    city: "Aswan",
-    category: "religious",
-    interests: ["spiritual", "culture"],
-    coordinates: [32.8841, 24.0252],
-    shortDescription: "The sacred island of Isis, reborn on Agilkia.",
-    description:
-      "Dismantled and reassembled to escape the rising Nile, this temple of Isis still hosts ceremonies on its colonnaded terraces.",
-    image: img("photo-1591800773278-26ddc83ce694"),
-    era: "Ptolemaic · 380 BCE",
+    name: "Temple of Philae",
+    emoji: "🌊",
+    lat: 24.0248,
+    lng: 32.8841,
+    category: "historical",
+    era: "380 BCE",
+    duration: "1–2 hrs",
+    color: "#6baee0",
+    rating: 4,
+    teaser: "Island sanctuary of Isis, rescued from the Nile.",
+    story:
+      "Dedicated to Isis, goddess of magic and motherhood, the island sanctuary of Philae was the last place in Egypt where the ancient religion was practiced — priests continued their rituals here until the 6th century CE, long after the rest of Egypt had embraced Christianity. When the Aswan Low Dam was built in the early 20th century, the temple was submerged for most of the year, its columns rising ghost-like from the waters. In a remarkable UNESCO rescue mission, the entire complex was dismantled stone by stone and reassembled on the higher island of Agilkia, where it stands today accessible only by boat.",
+  },
+  {
+    id: "egyptian-museum",
+    name: "Egyptian Museum, Cairo",
+    emoji: "🏺",
+    lat: 30.0478,
+    lng: 31.2338,
+    category: "museum",
+    era: "1902 CE",
+    duration: "3–5 hrs",
+    color: "#6bcba3",
+    rating: 5,
+    teaser: "120,000 artifacts including Tut's golden mask.",
+    story:
+      "The dusty-pink neoclassical building on Tahrir Square holds more than 120,000 ancient artifacts — from fragile papyrus scrolls to colossal granite statues — spanning five millennia of Egyptian civilization. Room 3 on the upper floor stops every visitor cold: it is here that Tutankhamun's golden death mask rests, its lapis lazuli and carnelian inlays still blazing with color after 3,300 years. The museum's mummy room houses the actual preserved remains of Ramesses II, Seti I, and 18 other pharaohs — a face-to-face encounter with history that no photograph can prepare you for.",
   },
   {
     id: "white-desert",
-    name: "White Desert National Park",
-    city: "Farafra",
+    name: "White Desert",
+    emoji: "🤍",
+    lat: 27.0,
+    lng: 27.93,
     category: "nature",
-    interests: ["nature"],
-    coordinates: [27.9947, 27.2589],
-    shortDescription: "Lunar chalk monoliths sculpted by wind and time.",
-    description:
-      "Cretaceous limestone formations rise from golden sand like frozen apparitions — best witnessed under a full moon.",
-    image: img("photo-1538128844524-3c8ec80a4bbf"),
-    era: "Cretaceous · 80M years",
+    era: "Natural Wonder",
+    duration: "Full day",
+    color: "#f0ebe0",
+    rating: 5,
+    teaser: "Surreal chalk formations under endless stars.",
+    story:
+      "Driving into Egypt's White Desert feels like landing on another planet: vast plains of bone-white chalk erupt into surreal formations shaped by centuries of wind erosion — some resemble giant mushrooms, others ice cream scoops, chickens, or abstract sculptures by a mad cosmic artist. Located in the Farafra Depression in the Western Desert, the landscape shifts from cream to rose-gold at sunset and glows spectral silver under a full moon. Camping overnight beneath a ceiling of undiluted stars, with the chalk formations casting strange moon-shadows, is one of the most otherworldly experiences available anywhere on Earth.",
   },
   {
     id: "siwa",
     name: "Siwa Oasis",
-    city: "Siwa",
+    emoji: "🌴",
+    lat: 29.2033,
+    lng: 25.5196,
     category: "nature",
-    interests: ["nature", "culture", "spiritual"],
-    coordinates: [25.5197, 29.2032],
-    shortDescription: "Salt lakes, date palms, and the Oracle of Amun.",
-    description:
-      "The remote oasis where Alexander the Great was declared a god, still home to the Berber-speaking Siwi people and their mudbrick fortresses.",
-    image: img("photo-1547636780-9b9b8e259ce9"),
-    era: "Ancient · 7th century BCE",
+    era: "Ancient",
+    duration: "2–3 days",
+    color: "#6bcba3",
+    rating: 5,
+    teaser: "Berber oasis where Alexander met the Oracle.",
+    story:
+      "Hidden in a hollow of the Great Sand Sea near the Libyan border, Siwa is Egypt's most remote and bewitching oasis — a place where mudbrick fortresses, freshwater springs, and date palm groves have sustained a distinct Berber culture for millennia. Alexander the Great made the arduous desert crossing specifically to consult the Oracle of Amun at the Temple of the Oracle, where priests reportedly declared him son of Zeus-Ammon. Today, visitors swim in Cleopatra's Bath — a natural spring said to have been a royal retreat — and watch the salt lake of Birket Siwa shimmer pink and violet at dusk.",
   },
   {
-    id: "alexandria-library",
-    name: "Bibliotheca Alexandrina",
-    city: "Alexandria",
-    category: "museum",
-    interests: ["culture", "history"],
-    coordinates: [29.9092, 31.2089],
-    shortDescription: "A modern temple of knowledge on an ancient shore.",
-    description:
-      "Inaugurated in 2002 to commemorate the lost library of antiquity, its tilted disc evokes a second sun rising over the Mediterranean.",
-    image: img("photo-1555662639-4c5b22d80bd4"),
-    era: "Modern · 2002",
-  },
-  {
-    id: "saqqara",
-    name: "Saqqara Step Pyramid",
-    city: "Saqqara",
-    category: "historical",
-    interests: ["history"],
-    coordinates: [31.2167, 29.8713],
-    shortDescription: "The world's first monumental stone building.",
-    description:
-      "Designed by the polymath Imhotep for Pharaoh Djoser, this stepped pyramid invented the architectural vocabulary of the ancient world.",
-    image: img("photo-1578439287052-3a93643daab5"),
-    era: "Old Kingdom · 2670 BCE",
+    id: "mount-sinai",
+    name: "Mount Sinai",
+    emoji: "⛰️",
+    lat: 28.5392,
+    lng: 33.9757,
+    category: "nature",
+    era: "Biblical",
+    duration: "Half day",
+    color: "#e06b6b",
+    rating: 5,
+    teaser: "Sunrise climb to where Moses received the Commandments.",
+    story:
+      "Rising 2,285 meters above sea level in the jagged granite heart of the Sinai Peninsula, Mount Sinai is one of the most sacred mountains on Earth — revered by Jews, Christians, and Muslims as the place where Moses received the Ten Commandments from God. Most pilgrims begin their ascent at 2 a.m., climbing 3,750 stone steps by torchlight to reach the summit before dawn, huddled in blankets against the bitter cold. The reward is a sunrise that spreads across an ocean of purple mountain peaks — an experience so viscerally beautiful that even the most secular traveler understands why ancient people believed this was a place where heaven meets earth.",
   },
 ];
 
-export const stories: Story[] = [
-  {
-    id: "nile-passage",
-    title: "The Nile Passage",
-    subtitle: "From the Old Kingdom capital to the southern frontier.",
-    cover: img("photo-1568322445389-f64ac2515020"),
-    steps: [
-      {
-        landmarkId: "giza",
-        chapter: "I. Where it Began",
-        narration:
-          "Before the journey south, stand at the foot of the Great Pyramid at dawn. The plateau is silent. The stones still hold the cold of the desert night.",
-      },
-      {
-        landmarkId: "saqqara",
-        chapter: "II. The First Stone",
-        narration:
-          "A short drive south, Saqqara reveals the prototype — Imhotep's stepped vision, the moment architecture was invented in stone.",
-      },
-      {
-        landmarkId: "karnak",
-        chapter: "III. The Great Temple",
-        narration:
-          "Six hundred kilometers upriver, Karnak's hypostyle forest swallows the visitor. Each column is taller than a five-story building.",
-      },
-      {
-        landmarkId: "valley-of-kings",
-        chapter: "IV. The Hidden Kings",
-        narration:
-          "Across the Nile, the western hills conceal the resting places of New Kingdom rulers — descend into the painted darkness of KV9.",
-      },
-      {
-        landmarkId: "abu-simbel",
-        chapter: "V. Frontier of the Sun",
-        narration:
-          "Finally, at the southern edge of the empire, four colossi watch the rising sun illuminate the inner sanctuary — exactly as Ramesses commanded.",
-      },
-    ],
-  },
-  {
-    id: "desert-mystics",
-    title: "Echoes in the Dust",
-    subtitle: "Oases, oracles, and chalk monoliths.",
-    cover: img("photo-1538128844524-3c8ec80a4bbf"),
-    steps: [
-      {
-        landmarkId: "siwa",
-        chapter: "I. The Oracle's Garden",
-        narration:
-          "Eight hours from the coast, Siwa appears — date palms, salt pools, and the ruined temple where Alexander asked the gods who he was.",
-      },
-      {
-        landmarkId: "white-desert",
-        chapter: "II. The White Silence",
-        narration:
-          "South through the Black Desert, the landscape bleaches. Wind-carved chalk forms rise like sleeping animals across the plain.",
-      },
-      {
-        landmarkId: "philae",
-        chapter: "III. The Island of Isis",
-        narration:
-          "Return to the river. On Agilkia Island, the temple of Isis — saved twice from the rising Nile — still receives offerings at dusk.",
-      },
-    ],
-  },
-];
+export const categoryMeta: Record<Category, { label: string; color: string; emoji: string }> = {
+  historical: { label: "Historical", color: "oklch(0.76 0.11 80)", emoji: "🏛️" },
+  museum:     { label: "Museums",    color: "oklch(0.7 0.13 160)", emoji: "🏺" },
+  nature:     { label: "Nature",     color: "oklch(0.7 0.15 140)", emoji: "🌿" },
+  culture:    { label: "Culture",    color: "oklch(0.7 0.18 35)",  emoji: "✨" },
+};
