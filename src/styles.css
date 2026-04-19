@@ -1,14 +1,14 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import "maplibre-gl/dist/maplibre-gl.css";
+@import "leaflet/dist/leaflet.css";
 
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Kemet — Egyptian Tourism Platform
- * Cinematic Mystique theme: dusk + burnt spice + warm sand
- * All colors in oklch, semantic tokens only.
+ * Pharos — Egyptian Heritage Tourism
+ * Dark luxury: near-black bg + warm gold + spice red accents
+ * Cinzel display, Nunito body. All colors in oklch.
  */
 
 @theme inline {
@@ -37,147 +37,180 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
-  --color-spice: var(--spice);
   --color-gold: var(--gold);
-  --color-sand: var(--sand);
-  --color-charcoal: var(--charcoal);
-  --color-dusk: var(--dusk);
+  --color-gold-soft: var(--gold-soft);
+  --color-spice: var(--spice);
+  --color-night: var(--night);
   --font-display: var(--font-display);
   --font-body: var(--font-body);
-  --font-mono: var(--font-mono);
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.625rem;
 
-  /* Cinematic dusk palette */
-  --dusk: oklch(0.16 0.025 40);
-  --charcoal: oklch(0.21 0.028 38);
-  --sand: oklch(0.97 0.015 80);
-  --spice: oklch(0.65 0.18 45);
-  --gold: oklch(0.78 0.15 75);
+  /* Pharos palette — near-black + warm gold */
+  --night: oklch(0.13 0.012 260);          /* #080a10 vibe */
+  --night-2: oklch(0.17 0.014 260);
+  --gold: oklch(0.76 0.11 80);              /* #c8a96e */
+  --gold-soft: oklch(0.85 0.08 82);
+  --spice: oklch(0.62 0.18 35);
+  --sand: oklch(0.95 0.02 80);
 
-  --background: oklch(0.16 0.025 40);
-  --foreground: oklch(0.97 0.015 80);
+  --background: oklch(0.13 0.012 260);
+  --foreground: oklch(0.95 0.015 80);
 
-  --card: oklch(0.21 0.028 38);
-  --card-foreground: oklch(0.97 0.015 80);
+  --card: oklch(0.17 0.014 260);
+  --card-foreground: oklch(0.95 0.015 80);
 
-  --popover: oklch(0.18 0.025 40);
-  --popover-foreground: oklch(0.97 0.015 80);
+  --popover: oklch(0.16 0.014 260);
+  --popover-foreground: oklch(0.95 0.015 80);
 
-  --primary: oklch(0.65 0.18 45);
-  --primary-foreground: oklch(0.16 0.025 40);
+  --primary: oklch(0.76 0.11 80);
+  --primary-foreground: oklch(0.13 0.012 260);
 
-  --secondary: oklch(0.26 0.03 38);
-  --secondary-foreground: oklch(0.97 0.015 80);
+  --secondary: oklch(0.22 0.018 260);
+  --secondary-foreground: oklch(0.95 0.015 80);
 
-  --muted: oklch(0.24 0.025 38);
-  --muted-foreground: oklch(0.7 0.025 60);
+  --muted: oklch(0.2 0.016 260);
+  --muted-foreground: oklch(0.7 0.02 80);
 
-  --accent: oklch(0.78 0.15 75);
-  --accent-foreground: oklch(0.16 0.025 40);
+  --accent: oklch(0.62 0.18 35);
+  --accent-foreground: oklch(0.95 0.015 80);
 
   --destructive: oklch(0.6 0.22 25);
   --destructive-foreground: oklch(0.97 0.015 80);
 
-  --border: oklch(0.97 0.015 80 / 8%);
-  --input: oklch(0.97 0.015 80 / 12%);
-  --ring: oklch(0.65 0.18 45);
+  --border: oklch(0.76 0.11 80 / 14%);
+  --input: oklch(0.95 0.015 80 / 12%);
+  --ring: oklch(0.76 0.11 80);
 
-  --font-display: "DM Serif Display", Georgia, serif;
-  --font-body: "Outfit", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Cinzel", Georgia, serif;
+  --font-body: "Nunito", system-ui, sans-serif;
 
-  /* Gradients */
-  --gradient-spice: linear-gradient(135deg, oklch(0.65 0.18 45), oklch(0.78 0.15 75));
-  --gradient-dusk: radial-gradient(ellipse at top, oklch(0.21 0.028 38), oklch(0.13 0.02 40));
-  --glow-spice: radial-gradient(circle, oklch(0.65 0.18 45 / 0.25) 0%, transparent 60%);
-  --glow-gold: radial-gradient(circle, oklch(0.78 0.15 75 / 0.15) 0%, transparent 70%);
+  --gradient-gold: linear-gradient(135deg, oklch(0.76 0.11 80), oklch(0.85 0.08 82));
+  --gradient-night: radial-gradient(ellipse at top, oklch(0.18 0.016 260), oklch(0.1 0.01 260));
+  --gradient-hero: linear-gradient(180deg, oklch(0.13 0.012 260 / 0.4) 0%, oklch(0.13 0.012 260 / 0.85) 60%, oklch(0.13 0.012 260) 100%);
+  --glow-gold: radial-gradient(circle, oklch(0.76 0.11 80 / 0.25) 0%, transparent 60%);
 
-  /* Shadows */
-  --shadow-spice: 0 20px 60px -20px oklch(0.65 0.18 45 / 0.4);
-  --shadow-deep: 0 30px 80px -30px oklch(0 0 0 / 0.6);
+  --shadow-gold: 0 20px 60px -20px oklch(0.76 0.11 80 / 0.35);
+  --shadow-deep: 0 30px 80px -30px oklch(0 0 0 / 0.7);
 
-  /* Transitions */
   --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.dark {
-  /* same as root, cinematic theme is dark by default */
-}
+.dark { /* same — dark by default */ }
 
 @layer base {
-  * {
-    border-color: var(--color-border);
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
   body {
-    background: var(--gradient-dusk);
+    background: var(--gradient-night);
     color: var(--color-foreground);
     font-family: var(--font-body);
-    font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
   }
+  h1, h2, h3, h4, .font-display { font-family: var(--font-display); letter-spacing: 0.01em; }
+  ::selection { background: var(--gold); color: var(--night); }
 
-  ::selection {
-    background: var(--spice);
-    color: var(--sand);
+  /* Leaflet dark theme overrides */
+  .leaflet-container {
+    background: var(--night) !important;
+    font-family: var(--font-body);
+    outline: none;
   }
-
-  /* MapLibre dark popover styling */
-  .maplibregl-popup-content {
+  .leaflet-popup-content-wrapper {
     background: var(--popover) !important;
     color: var(--popover-foreground) !important;
     border: 1px solid var(--border) !important;
     border-radius: var(--radius-lg) !important;
-    padding: 0 !important;
-    overflow: hidden;
     box-shadow: var(--shadow-deep) !important;
   }
-  .maplibregl-popup-tip {
-    border-top-color: var(--popover) !important;
-    border-bottom-color: var(--popover) !important;
+  .leaflet-popup-tip {
+    background: var(--popover) !important;
+    border: 1px solid var(--border) !important;
   }
-  .maplibregl-popup-close-button {
-    color: var(--sand) !important;
-    font-size: 20px !important;
-    padding: 4px 8px !important;
+  .leaflet-popup-close-button {
+    color: var(--gold) !important;
+    font-size: 22px !important;
+    padding: 6px 8px !important;
   }
-  .maplibregl-ctrl button {
-    background-color: var(--card) !important;
+  .leaflet-control-zoom a {
+    background: var(--card) !important;
+    color: var(--gold) !important;
+    border-color: var(--border) !important;
   }
-  .maplibregl-ctrl button span {
-    filter: invert(1) hue-rotate(180deg);
+  .leaflet-control-zoom a:hover { background: var(--secondary) !important; }
+  .leaflet-control-attribution {
+    background: oklch(0.13 0.012 260 / 0.7) !important;
+    color: var(--muted-foreground) !important;
+    backdrop-filter: blur(6px);
+  }
+  .leaflet-control-attribution a { color: var(--gold) !important; }
+
+  /* Custom gold pin */
+  .pharos-pin {
+    background: transparent;
+    border: none;
+  }
+  .pharos-pin-inner {
+    width: 42px; height: 42px;
+    border-radius: 50% 50% 50% 0;
+    background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+    transform: rotate(-45deg);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 16px oklch(0 0 0 / 0.5), 0 0 0 3px oklch(0.13 0.012 260);
+    border: 2px solid var(--gold);
+    transition: transform 0.25s var(--ease-cinematic);
+  }
+  .pharos-pin-inner span {
+    transform: rotate(45deg);
+    font-size: 18px;
+    line-height: 1;
+  }
+  .pharos-pin:hover .pharos-pin-inner {
+    transform: rotate(-45deg) scale(1.15);
+  }
+  .pharos-pin.is-active .pharos-pin-inner {
+    background: linear-gradient(135deg, var(--spice), var(--gold));
+    box-shadow: 0 0 0 3px var(--gold), 0 8px 24px oklch(0.62 0.18 35 / 0.6);
   }
 }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
-
-  .bg-gradient-spice { background: var(--gradient-spice); }
-  .bg-glow-spice { background: var(--glow-spice); }
+  .bg-gradient-gold { background: var(--gradient-gold); }
+  .bg-gradient-hero { background: var(--gradient-hero); }
   .bg-glow-gold { background: var(--glow-gold); }
-
-  .shadow-spice { box-shadow: var(--shadow-spice); }
+  .shadow-gold { box-shadow: var(--shadow-gold); }
   .shadow-deep { box-shadow: var(--shadow-deep); }
-
   .ease-cinematic { transition-timing-function: var(--ease-cinematic); }
 
-  @keyframes pulse-pin {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.4); opacity: 0.7; }
+  .hieroglyph-border {
+    background-image: repeating-linear-gradient(90deg,
+      var(--gold) 0 6px, transparent 6px 14px,
+      var(--gold) 14px 16px, transparent 16px 28px);
+    height: 2px;
+    opacity: 0.6;
   }
-  .animate-pulse-pin { animation: pulse-pin 2s var(--ease-cinematic) infinite; }
 
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(16px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  .animate-fade-up { animation: fade-up 0.6s var(--ease-cinematic) both; }
+  .animate-fade-up { animation: fade-up 0.7s var(--ease-cinematic) both; }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .text-shimmer {
+    background: linear-gradient(90deg, var(--gold-soft), var(--gold), oklch(0.95 0.05 80), var(--gold), var(--gold-soft));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
 }
