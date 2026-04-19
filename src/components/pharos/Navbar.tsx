@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const tabs = [
   { to: "/", label: "Home" },

@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Navbar } from "@/components/pharos/Navbar";
 import { Footer } from "@/components/pharos/Footer";
 import { Rating } from "@/components/pharos/Rating";
